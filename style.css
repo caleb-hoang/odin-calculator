@@ -1,0 +1,31 @@
+.calculatorBody {
+    display:flex
+}
+
+.displayBox {
+    font-size:10px; /*Placeholder to prevent VSC warning*/
+}
+
+.buttons {
+    display:flex
+}
+
+.buttonsNumbers {
+    display:flex
+}
+
+.numRow {
+    display:flex
+}
+
+.buttonsFunctions {
+    display:flex
+}
+
+.numButton {
+    font-size:10px; /*Placeholder to prevent VSC warning*/
+}
+
+.funcButton {
+    font-size:10px; /*Placeholder to prevent VSC warning*/
+}
