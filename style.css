@@ -1,29 +1,81 @@
+/*Main calculator background*/
 .calculatorBody {
-    display:flex
+    display:flex;
+    height:500px;
+    width:350px;
+    background:lightskyblue;
+    align-items:center;
+    flex-direction:column
 }
 
 .displayBox {
     font-size:10px; /*Placeholder to prevent VSC warning*/
+    background:lightcoral;
+    height: 75px;
+    width: 300px;
+    margin: 25px;
+    border: 0px;
+    padding: 0px;
 }
 
 .buttons {
-    display:flex
+    display:flex;
+    height: 350px;
+    width: 300px;
+    flex-direction:row;
+    justify-content:space-between;
+    gap: 20px;
 }
 
 .buttonsNumbers {
-    display:flex
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    background:lightcyan;
+    flex-grow:1;
 }
 
 .numRow {
-    display:flex
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
+    gap:15px;
+
+    margin-top:10px;
+    margin-bottom:10px;
 }
 
 .buttonsFunctions {
-    display:flex
+    display:flex;
+    height: 350px;
+    width: 50px;
+    background: lightcyan;
+    flex-direction:column;
+    justify-content:space-between;
+    flex-grow:1;
+    align-items:center;
 }
 
 .numButton {
-    font-size:10px; /*Placeholder to prevent VSC warning*/
+    width: 50px;
+    height:50px;
+    background:lightpink;
+    text-align:center;
+    text-justify:center;
+    
+
+}
+
+.funcButton {
+    width: 50px;
+    height:50px;
+    background:lightseagreen;
+    text-align:center;
+    text-justify:center;
+    
+    margin-top:10px;
+    margin-bottom:10px;
+
 }
 
 .funcButton {
