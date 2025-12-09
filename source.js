@@ -20,7 +20,7 @@ function subtract() {
         return "ERROR"
     }
     num1 = parseFloat(num1) - parseFloat(num2)
-    return
+    return num1
 }
 
 function multiply() {
@@ -121,7 +121,6 @@ function buildFunctionButton(funct, parent) {
     const button = document.createElement('div')
     button.classList.add('funcButton')
     button.textContent = funct
-    button.id = funct
     // Add interactivity
     button.addEventListener("click", () => {funcClick(funct)})
     parent.appendChild(button)
