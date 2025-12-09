@@ -7,36 +7,50 @@ const display = document.querySelector(".displayBox")
 function execute() {}
 
 // Functions
-function add(val1, val2) {
-    if (val1 == null || val2 == null) {
+function add() {
+    if (num1 == null || num2 == null) {
         return "ERROR"
     }
-    return val1 + val2
+    num1 = parseFloat(num1) + parseFloat(num2)
+    return num1
 }
 
-function subtract(val1, val2) {
-    if (val1 == null || val2 == null) {
+function subtract() {
+    if (num1 == null || num2 == null) {
         return "ERROR"
     }
-    return val1 - val2
+    num1 = parseFloat(num1) - parseFloat(num2)
+    return
 }
 
-function multiply(val1, val2) {
-    if (val1 == null || val2 == null) {
+function multiply() {
+    if (num1 == null || num2 == null) {
         return "ERROR"
     }
-    return val1 * val2
+    num1 = num1 * num2
+    return truncateDecimal(num1*num2)
 }
 
-function divide(val1, val2) {
-    if (val1 == null || val2 == null) {
+function divide() {
+    if (num1 == null || num2 == null) {
         return "ERROR"
     }
 
-    if (val2 == 0) { // edge case for dividing by zero
-        return "Don't even think about it."
+    if (num2 == 0) { // edge case for dividing by zero
+        display.textContent = "Just don't."
+        num1 = null
+        num2 = null
+        func = null
+        updateButtons()
+        return null
     }
-    return val1 / val2
+    return truncateDecimal(num1 / num2)
+}
+
+function truncateDecimal(value) {
+    value *= 100
+    value = Math.floor(value)
+    return value / 100
 }
 
 
@@ -107,12 +121,9 @@ function buildFunctionButton(funct, parent) {
     const button = document.createElement('div')
     button.classList.add('funcButton')
     button.textContent = funct
-
+    button.id = funct
     // Add interactivity
     button.addEventListener("click", () => {funcClick(funct)})
-    if (funct != '=' && funct != 'c') {
-        button.addEventListener("click", () => {button.style.backgroundColor = 'steelblue'})
-    }
     parent.appendChild(button)
 }
 
@@ -120,16 +131,80 @@ function buildFunctionButton(funct, parent) {
 function funcClick(funct) {
     console.log("Button " + funct + " clicked!")
 
+    if (funct == 'c') {
+        num1 = null
+        num2 = null
+        func = null
+        updateScreen()
+        updateButtons()
+        return
+    }
 
+    if (funct == '=') {
+        evaluate()
+        updateButtons()
+        return
+    }
+
+    if (num1 == null) { // no num1; don't do anything.
+        // do nothing
+        return
+    } else if (num2 == null) { // no num2; set func and wait for num2
+        func = funct
+        console.log("new function: " + func)
+        updateButtons(func)
+    } else { // num1 and num2; evaluate, then set new func if error is not returned.
+        let calc = evaluate()
+
+        if (calc != null) { // only set new func if the previous operation was valid
+            func = funct
+            console.log("new function: " + func)
+        }
+        updateButtons()
+    }
 }
 
-function updateScreen() {
+function updateScreen(isEval) { // update the display.
     if(func == null) {
         display.textContent = num1
     } else {
         display.textContent = num2
     }
+
+    if (isEval) {
+        display.textContent = num1
+    }
 }
+
+function updateButtons() {
+    const funcButts = document.querySelectorAll('.funcButton')
+    funcButts.forEach(butt =>{
+        if (butt.textContent == func) {
+            butt.style.backgroundColor = 'steelblue'
+        } else {
+            butt.style.backgroundColor = 'lightseagreen'
+        }
+    })
+}
+
+function evaluate() {
+    let result = null
+    if (func == '+') {result = add()}
+    if (func == '-') {result = subtract()}
+    if (func == '*') {result = multiply()}
+    if (func == '/') {result = divide()} 
+
+    console.log("Result: " + result)
+    if (result == null) {
+        return null
+    } else {
+        num1 = result
+        updateScreen(true)
+        return result
+    }
+}
+
+
 
 buildNumButtons()
 buildFunctionButtons()

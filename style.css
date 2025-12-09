@@ -63,25 +63,22 @@
 }
 
 .numButton, .funcButton {
-    width: 40px;
-    height:40px;
     text-align:center;
-    line-height:40px;
     user-select:none;
 }
 
 .numButton {
     height:50px;
     width:50px;
+    line-height:50px;
     background:lightpink;
 }
 
 .funcButton {
+    width: 40px;
+    height:40px;
+    line-height:40px;
     background:lightseagreen;
     margin-top:5px;
     margin-bottom:5px;
-}
-
-.funcButton {
-    font-size:10px; /*Placeholder to prevent VSC warning*/
 }
