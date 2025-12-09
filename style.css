@@ -9,13 +9,19 @@
 }
 
 .displayBox {
-    font-size:10px; /*Placeholder to prevent VSC warning*/
+    font-size:40px; /*Placeholder to prevent VSC warning*/
     background:lightcoral;
     height: 75px;
     width: 300px;
     margin: 25px;
     border: 0px;
     padding: 0px;
+    text-align:left;
+    line-height:75px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+
 }
 
 .buttons {
@@ -56,26 +62,24 @@
     align-items:center;
 }
 
-.numButton {
-    width: 50px;
-    height:50px;
-    background:lightpink;
+.numButton, .funcButton {
+    width: 40px;
+    height:40px;
     text-align:center;
-    text-justify:center;
-    
+    line-height:40px;
+    user-select:none;
+}
 
+.numButton {
+    height:50px;
+    width:50px;
+    background:lightpink;
 }
 
 .funcButton {
-    width: 50px;
-    height:50px;
     background:lightseagreen;
-    text-align:center;
-    text-justify:center;
-    
-    margin-top:10px;
-    margin-bottom:10px;
-
+    margin-top:5px;
+    margin-bottom:5px;
 }
 
 .funcButton {

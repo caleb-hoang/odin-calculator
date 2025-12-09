@@ -1,35 +1,35 @@
-let num1 = NaN
-let num2 = NaN
-let func = NaN
-
+let num1 = null
+let num2 = null
+let func = null
+const display = document.querySelector(".displayBox")
 
 // Attempt to execute an operation
 function execute() {}
 
 // Functions
 function add(val1, val2) {
-    if (isNaN(val1) || isNaN(val2)) {
+    if (val1 == null || val2 == null) {
         return "ERROR"
     }
     return val1 + val2
 }
 
 function subtract(val1, val2) {
-    if (isNaN(val1) || isNaN(val2)) {
+    if (val1 == null || val2 == null) {
         return "ERROR"
     }
     return val1 - val2
 }
 
 function multiply(val1, val2) {
-    if (isNaN(val1) || isNaN(val2)) {
+    if (val1 == null || val2 == null) {
         return "ERROR"
     }
     return val1 * val2
 }
 
 function divide(val1, val2) {
-    if (isNaN(val1) || isNaN(val2)) {
+    if (val1 == null || val2 == null) {
         return "ERROR"
     }
 
@@ -72,34 +72,63 @@ function buildNumButton(value, parent) {
 // function called when a numButton is clicked
 function numClick(value) {
     console.log("Button " + value + "clicked!")
+
+    if (num1 == null) { // num1 is null; input is appended to num1
+        num1 = "" + value
+    } else {
+        if (func == null) { // function button has not been pressed; input is appended to num1
+            num1 = ("" + num1) + value
+        } else { // function button has been pressed; input is appended to num2
+            if(num2 == null) { // num2 is null; input is appended to num2
+                num2 = "" + value
+            } else { // num2 is not null; input is appended to num2
+                num2 = ("" + num2) + value
+            }
+        }
+    }
+
+    updateScreen()
 }
 
 // Create function buttons
 function buildFunctionButtons() {
     
     const funcButtons = document.querySelector(".buttonsFunctions")
+    buildFunctionButton('c', funcButtons)
     buildFunctionButton('+', funcButtons)
     buildFunctionButton('-', funcButtons)
     buildFunctionButton('*', funcButtons)
     buildFunctionButton('/', funcButtons)
-    buildFunctionButton('c', funcButtons)
+    buildFunctionButton('=', funcButtons)
     
 }
 
-function buildFunctionButton(func, parent) {
+function buildFunctionButton(funct, parent) {
     const button = document.createElement('div')
-    button.classList.add('numButton')
-    button.textContent = func
+    button.classList.add('funcButton')
+    button.textContent = funct
 
     // Add interactivity
-    button.addEventListener("click", () => {funcClick(func)})
-
+    button.addEventListener("click", () => {funcClick(funct)})
+    if (funct != '=' && funct != 'c') {
+        button.addEventListener("click", () => {button.style.backgroundColor = 'steelblue'})
+    }
     parent.appendChild(button)
 }
 
 // Function called when a function button is clicked
-function funcClick(func) {
-    console.log("Button " + func + " clicked!")
+function funcClick(funct) {
+    console.log("Button " + funct + " clicked!")
+
+
+}
+
+function updateScreen() {
+    if(func == null) {
+        display.textContent = num1
+    } else {
+        display.textContent = num2
+    }
 }
 
 buildNumButtons()
